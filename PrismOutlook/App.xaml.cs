@@ -46,8 +46,8 @@ namespace PrismOutlook
         protected override void ConfigureRegionAdapterMappings(RegionAdapterMappings regionAdapterMappings)
         {
             base.ConfigureRegionAdapterMappings(regionAdapterMappings);
-            regionAdapterMappings.RegisterMapping(typeof(TabControl), Container.Resolve<XamOutlookBarRegionAdapter>());
-            regionAdapterMappings.RegisterMapping(typeof(Menu), Container.Resolve<XamRibbonRegionAdapter>());
+            regionAdapterMappings.RegisterMapping(typeof(TabControl), Container.Resolve<OutlookBarRegionAdapter>());
+            regionAdapterMappings.RegisterMapping(typeof(Menu), Container.Resolve<MenuRegionAdapter>());
         }
 
         protected override void ConfigureDefaultRegionBehaviors(IRegionBehaviorFactory regionBehaviors)

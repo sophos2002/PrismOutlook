@@ -5,17 +5,17 @@ using System.Windows.Controls;
 
 namespace PrismOutlook.Core.Regions
 {
-    public class XamRibbonRegionAdapter : RegionAdapterBase<Menu>
+    public class MenuRegionAdapter : RegionAdapterBase<Menu>
     {
-        public XamRibbonRegionAdapter(IRegionBehaviorFactory regionBehaviorFactory)
+        public MenuRegionAdapter(IRegionBehaviorFactory regionBehaviorFactory)
             : base(regionBehaviorFactory)
         {
         }
 
-        protected override void Adapt(IRegion region, Menu regionTarget)
+        protected override void Adapt(IRegion region, Menu targetMenu)
         {
             if (region == null) throw new ArgumentNullException(nameof(region));
-            if (regionTarget == null) throw new ArgumentNullException(nameof(regionTarget));
+            if (targetMenu == null) throw new ArgumentNullException(nameof(targetMenu));
 
             region.Views.CollectionChanged += (s, e) =>
             {
@@ -23,7 +23,7 @@ namespace PrismOutlook.Core.Regions
                 {
                     foreach (var view in e.NewItems)
                     {
-                        AddViewToRegion(view, regionTarget);
+                        AddViewToRegion(view, targetMenu);
                     }
 
                 }
@@ -31,7 +31,7 @@ namespace PrismOutlook.Core.Regions
                 {
                     foreach (var view in e.OldItems)
                     {
-                        RemoveViewFromRegion(view, regionTarget);
+                        RemoveViewFromRegion(view, targetMenu);
                     }
                 }
             };
@@ -39,22 +39,22 @@ namespace PrismOutlook.Core.Regions
 
         protected override IRegion CreateRegion()
         {
-            return new SingleActiveRegion();
+            return new AllActiveRegion();
         }
 
-        static void AddViewToRegion(object view, Menu xamRibbon)
+        static void AddViewToRegion(object view, Menu menu)
         {
-            if (view is MenuItem ribbonTabItem)
+            if (view is MenuItem item)
             {
-                xamRibbon.Items.Add(ribbonTabItem);
+                menu.Items.Add(item);
             }
         }
 
-        static void RemoveViewFromRegion(object view, Menu xamRibbon)
+        static void RemoveViewFromRegion(object view, Menu menu)
         {
-            if (view is MenuItem ribbonTabItem)
+            if (view is MenuItem item)
             {
-                xamRibbon.Items.Remove(ribbonTabItem);
+                menu.Items.Remove(item);
             }
         }
     }

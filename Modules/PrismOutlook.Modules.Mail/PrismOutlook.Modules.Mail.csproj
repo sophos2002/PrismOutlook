@@ -159,24 +159,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Infragistics.WPF.DataGrids">
-      <Version>19.1.84</Version>
-    </PackageReference>
-    <PackageReference Include="Infragistics.WPF.DataTree">
-      <Version>19.1.84</Version>
-    </PackageReference>
-    <PackageReference Include="Infragistics.WPF.OutlookBar">
-      <Version>19.1.84</Version>
-    </PackageReference>
-    <PackageReference Include="Infragistics.WPF.Ribbon">
-      <Version>19.1.84</Version>
-    </PackageReference>
-    <PackageReference Include="Infragistics.WPF.RichTextDocument.Rtf">
-      <Version>19.1.84</Version>
-    </PackageReference>
-    <PackageReference Include="Infragistics.WPF.RichTextEditor">
-      <Version>19.1.84</Version>
-    </PackageReference>
     <PackageReference Include="Prism.Wpf" Version="7.2.0.1367" />
   </ItemGroup>
   <ItemGroup>
