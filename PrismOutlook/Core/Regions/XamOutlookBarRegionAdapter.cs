@@ -1,9 +1,10 @@
-﻿using Infragistics.Windows.OutlookBar;
-using Prism.Regions;
+﻿using Prism.Regions;
+
+using System.Windows.Controls;
 
 namespace PrismOutlook.Core.Regions
 {
-    public class XamOutlookBarRegionAdapter : RegionAdapterBase<XamOutlookBar>
+    public class XamOutlookBarRegionAdapter : RegionAdapterBase<TabControl>
     {
         public XamOutlookBarRegionAdapter(IRegionBehaviorFactory factory)
             : base(factory)
@@ -11,7 +12,7 @@ namespace PrismOutlook.Core.Regions
 
         }
 
-        protected override void Adapt(IRegion region, XamOutlookBar regionTarget)
+        protected override void Adapt(IRegion region, TabControl regionTarget)
         {
             region.Views.CollectionChanged += ((x, y) =>
             {
@@ -19,25 +20,26 @@ namespace PrismOutlook.Core.Regions
                 {
                     case System.Collections.Specialized.NotifyCollectionChangedAction.Add:
                         {
-                            foreach (OutlookBarGroup group in y.NewItems)
+                            foreach (TabItem i in y.NewItems)
                             {
-                                regionTarget.Groups.Add(group);
+                                regionTarget.Items.Add(i);
 
                                 //The WPF XamOutlookBar does not automatically select the first group in it's collection.
                                 //So we must manually select the group if it is the first one in the collection, but we don't
                                 //want to excute this code every time a new group is added, only if the first group is the current group being added.
-                                if (regionTarget.Groups[0] == group)
-                                {
-                                    regionTarget.SelectedGroup = group;
-                                }
+
+                                //! if (regionTarget.Items[0] == group)
+                                //! {
+                                //!     regionTarget.SelectedGroup = group;
+                                //! }
                             }
                             break;
                         }
                     case System.Collections.Specialized.NotifyCollectionChangedAction.Remove:
                         {
-                            foreach (OutlookBarGroup group in y.OldItems)
+                            foreach (TabItem i in y.OldItems)
                             {
-                                regionTarget.Groups.Remove(group);
+                                regionTarget.Items.Remove(i);
                             }
                             break;
                         }

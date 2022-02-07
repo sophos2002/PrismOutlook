@@ -1,18 +1,18 @@
-﻿using Infragistics.Windows.Ribbon;
-using Prism.Regions;
+﻿using Prism.Regions;
 using System;
 using System.Collections.Specialized;
+using System.Windows.Controls;
 
 namespace PrismOutlook.Core.Regions
 {
-    public class XamRibbonRegionAdapter : RegionAdapterBase<XamRibbon>
+    public class XamRibbonRegionAdapter : RegionAdapterBase<Menu>
     {
         public XamRibbonRegionAdapter(IRegionBehaviorFactory regionBehaviorFactory)
             : base(regionBehaviorFactory)
         {
         }
 
-        protected override void Adapt(IRegion region, XamRibbon regionTarget)
+        protected override void Adapt(IRegion region, Menu regionTarget)
         {
             if (region == null) throw new ArgumentNullException(nameof(region));
             if (regionTarget == null) throw new ArgumentNullException(nameof(regionTarget));
@@ -42,19 +42,19 @@ namespace PrismOutlook.Core.Regions
             return new SingleActiveRegion();
         }
 
-        static void AddViewToRegion(object view, XamRibbon xamRibbon)
+        static void AddViewToRegion(object view, Menu xamRibbon)
         {
-            if (view is RibbonTabItem ribbonTabItem)
+            if (view is MenuItem ribbonTabItem)
             {
-                xamRibbon.Tabs.Add(ribbonTabItem);
+                xamRibbon.Items.Add(ribbonTabItem);
             }
         }
 
-        static void RemoveViewFromRegion(object view, XamRibbon xamRibbon)
+        static void RemoveViewFromRegion(object view, Menu xamRibbon)
         {
-            if (view is RibbonTabItem ribbonTabItem)
+            if (view is MenuItem ribbonTabItem)
             {
-                xamRibbon.Tabs.Remove(ribbonTabItem);
+                xamRibbon.Items.Remove(ribbonTabItem);
             }
         }
     }

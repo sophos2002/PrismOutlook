@@ -1,9 +1,8 @@
-﻿using Infragistics.Controls.Editors;
-using Infragistics.Documents.RichText;
-using Infragistics.Windows.Ribbon;
-using PrismOutlook.Core;
+﻿using PrismOutlook.Core;
 using System;
 using System.Linq;
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Media;
 
@@ -14,7 +13,7 @@ namespace PrismOutlook.Modules.Mail.Menus
     /// </summary>
     public partial class MessageTab : ISupportDataContext, ISupportRichText
     {
-        private XamRichTextEditor _richTextEditor;
+        private RichTextBox _richTextEditor;
         private bool _updatingState;
 
         public static double[] FontSizes
@@ -31,7 +30,7 @@ namespace PrismOutlook.Modules.Mail.Menus
             }
         }
 
-        public XamRichTextEditor RichTextEditor
+        public RichTextBox RichTextEditor
         {
             get { return _richTextEditor; }
             set
@@ -55,39 +54,40 @@ namespace PrismOutlook.Modules.Mail.Menus
         public MessageTab()
         {
             InitializeComponent();
-            SetResourceReference(StyleProperty, typeof(RibbonTabItem));
+            SetResourceReference(StyleProperty, typeof(MenuItem));
 
             _fontSizes.ItemsSource = FontSizes;
             _fontNames.ItemsSource = Fonts.SystemFontFamilies.ToList().Select(x => x.Source);
         }
 
-        private void FontSizes_SelectedItemChanged(object sender, System.Windows.RoutedPropertyChangedEventArgs<object> e)
+        private void FontSizes_SelectedItemChanged(object sender, SelectionChangedEventArgs e)
         {
             if (_updatingState)
                 return;
 
-            RichTextEditor.Selection.ApplyFontSize((double)e.NewValue);
+            //! RichTextEditor.Selection.ApplyFontSize((double)e.NewValue);
         }
 
-        private void FontNames_SelectedItemChanged(object sender, System.Windows.RoutedPropertyChangedEventArgs<object> e)
+        private void FontNames_SelectedItemChanged(object sender, SelectionChangedEventArgs e)
         {
             if (_updatingState)
                 return;
 
-            if (e.NewValue == null)
-                return;
+            //!
+            //if (e.NewValue == null)
+            //    return;
 
-            var fontName = (string)e.NewValue;
+            //var fontName = (string)e.NewValue;
 
-            RichTextEditor.Selection.ApplyFont(new RichTextFont(fontName));
+            //RichTextEditor.Selection.ApplyFont(new RichTextFont(fontName));
         }
 
-        private void RichTextEditor_SelectionChanged(object sender, RichTextSelectionChangedEventArgs e)
+        private void RichTextEditor_SelectionChanged(object sender, RoutedEventArgs e)
         {
             UpdateVisualState();
         }
 
-        private void RichTextEditor_Loaded(object sender, System.Windows.RoutedEventArgs e)
+        private void RichTextEditor_Loaded(object sender, RoutedEventArgs e)
         {
             UpdateVisualState();
         }
@@ -96,109 +96,110 @@ namespace PrismOutlook.Modules.Mail.Menus
         {
             _updatingState = true;
 
-            DocumentSpan docSpan = RichTextEditor.Selection == null ? new DocumentSpan(0,0) : RichTextEditor.Selection.DocumentSpan;
-            var settings = RichTextEditor.Document.GetCommonCharacterSettings(docSpan);
+            //!
+            //DocumentSpan docSpan = RichTextEditor.Selection == null ? new DocumentSpan(0,0) : RichTextEditor.Selection.DocumentSpan;
+            //var settings = RichTextEditor.Document.GetCommonCharacterSettings(docSpan);
 
-            if (settings == null)
-            {
-                _updatingState = false;
-                return;
-            }
+            //if (settings == null)
+            //{
+            //    _updatingState = false;
+            //    return;
+            //}
 
-            UpdateFontSizes(settings);
-            UpdateFontFamily(settings);
+            //UpdateFontSizes(settings);
+            //UpdateFontFamily(settings);
 
-            UpdateToggleButton(_boldButton, settings.Bold);
-            UpdateToggleButton(_italicButton, settings.Italics);
-            UpdateUnderlineState(settings);
+            //UpdateToggleButton(_boldButton, settings.Bold);
+            //UpdateToggleButton(_italicButton, settings.Italics);
+            //UpdateUnderlineState(settings);
 
-            UpdateAlignment(docSpan);
-            UpdateParagraphListStyleState(docSpan);
+            //UpdateAlignment(docSpan);
+            //UpdateParagraphListStyleState(docSpan);
 
-            _updatingState = false;
+            //_updatingState = false;
         }
 
-        private void UpdateAlignment(DocumentSpan docSpan)
-        {
-            ParagraphSettings pSettings = RichTextEditor.Document.GetCommonParagraphSettings(docSpan);
-            if (pSettings.ParagraphAlignment.HasValue)
-            {
-                var alignment = pSettings.ParagraphAlignment.Value;
-                switch (alignment)
-                {
-                    case ParagraphAlignment.Start:
-                        {
-                            UpdateToggleButton(_alignLeft, true);
-                            break;
-                        }
-                    case ParagraphAlignment.Center:
-                        {
-                            UpdateToggleButton(_alignCenter, true);
-                            break;
-                        }
-                    case ParagraphAlignment.End:
-                        {
-                            UpdateToggleButton(_alignRight, true);
-                            break;
-                        }
-                    case ParagraphAlignment.Justify:
-                        {
-                            UpdateToggleButton(_alignJustify, true);
-                            break;
-                        }
-                }
-            }
-        }
+        //private void UpdateAlignment(DocumentSpan docSpan)
+        //{
+        //    ParagraphSettings pSettings = RichTextEditor.Document.GetCommonParagraphSettings(docSpan);
+        //    if (pSettings.ParagraphAlignment.HasValue)
+        //    {
+        //        var alignment = pSettings.ParagraphAlignment.Value;
+        //        switch (alignment)
+        //        {
+        //            case ParagraphAlignment.Start:
+        //                {
+        //                    UpdateToggleButton(_alignLeft, true);
+        //                    break;
+        //                }
+        //            case ParagraphAlignment.Center:
+        //                {
+        //                    UpdateToggleButton(_alignCenter, true);
+        //                    break;
+        //                }
+        //            case ParagraphAlignment.End:
+        //                {
+        //                    UpdateToggleButton(_alignRight, true);
+        //                    break;
+        //                }
+        //            case ParagraphAlignment.Justify:
+        //                {
+        //                    UpdateToggleButton(_alignJustify, true);
+        //                    break;
+        //                }
+        //        }
+        //    }
+        //}
 
-        void UpdateUnderlineState(CharacterSettings settings)
-        {
-            if (settings.UnderlineType.HasValue)
-                UpdateToggleButton(_underlineButton, settings.UnderlineType.Value != UnderlineType.None);
-        }
+        //void UpdateUnderlineState(CharacterSettings settings)
+        //{
+        //    if (settings.UnderlineType.HasValue)
+        //        UpdateToggleButton(_underlineButton, settings.UnderlineType.Value != UnderlineType.None);
+        //}
 
         void UpdateToggleButton(ToggleButton button, bool? value)
         {
             button.IsChecked = value.HasValue ? value.Value : false;
         }
 
-        void UpdateFontSizes(CharacterSettings settings)
-        {
-            _fontSizes.Value = settings.FontSize.HasValue ? settings.FontSize.Value.Points : 12.0;
-        }
+        //void UpdateFontSizes(CharacterSettings settings)
+        //{
+        //    _fontSizes.Value = settings.FontSize.HasValue ? settings.FontSize.Value.Points : 12.0;
+        //}
 
-        void UpdateFontFamily(CharacterSettings settings)
-        {
-            if (settings.FontSettings == null)
-                return;
+        //void UpdateFontFamily(CharacterSettings settings)
+        //{
+        //    if (settings.FontSettings == null)
+        //        return;
 
-            _fontNames.Value = (settings.FontSettings.Ascii.HasValue && !string.IsNullOrWhiteSpace(settings.FontSettings.Ascii.Value.Name))
-                                ? settings.FontSettings.Ascii.Value.Name : "Arial";
-        }
+        //    _fontNames.Value = (settings.FontSettings.Ascii.HasValue && !string.IsNullOrWhiteSpace(settings.FontSettings.Ascii.Value.Name))
+        //                        ? settings.FontSettings.Ascii.Value.Name : "Arial";
+        //}
 
         private void BulletsButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            SetSelectionParagraphListStyle(_bulletsButton);
+            //! SetSelectionParagraphListStyle(_bulletsButton);
         }
 
         private void NumbersButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            SetSelectionParagraphListStyle(_numbersButton);
+            //! SetSelectionParagraphListStyle(_numbersButton);
         }
 
-        private void SetSelectionParagraphListStyle(ToggleButton toggleButton)
-        {
-            if (toggleButton.IsChecked == true)
-                RichTextEditor.Selection.ApplyParagraphListStyle(toggleButton.Tag.ToString());
-            else
-                RichTextEditor.Selection.ClearParagraphListStyle();
-        }
+        //private void SetSelectionParagraphListStyle(ToggleButton toggleButton)
+        //{
+        //    if (toggleButton.IsChecked == true)
+        //        RichTextEditor.Selection.ApplyParagraphListStyle(toggleButton.Tag.ToString());
+        //    else
+        //        RichTextEditor.Selection.ClearParagraphListStyle();
+        //}
 
-        void UpdateParagraphListStyleState(DocumentSpan documentSpan)
-        {
-            string listStyleId = RichTextEditor.Document.GetCommonParagraphListStyle(documentSpan);
-            UpdateToggleButton(_bulletsButton, _bulletsButton.Tag.ToString() == listStyleId);
-            UpdateToggleButton(_numbersButton, _numbersButton.Tag.ToString() == listStyleId);
-        }
+        //void UpdateParagraphListStyleState(DocumentSpan documentSpan)
+        //{
+        //    string listStyleId = RichTextEditor.Document.GetCommonParagraphListStyle(documentSpan);
+        //    UpdateToggleButton(_bulletsButton, _bulletsButton.Tag.ToString() == listStyleId);
+        //    UpdateToggleButton(_numbersButton, _numbersButton.Tag.ToString() == listStyleId);
+        //}
     }
 }
 

@@ -1,18 +1,24 @@
-﻿<igWpf:XamRibbonWindow x:Class="PrismOutlook.Core.Dialogs.RibbonDialogWindow"
-    xmlns:igWpf="http://schemas.infragistics.com/xaml/wpf"
+﻿<Window x:Class="PrismOutlook.Core.Dialogs.RibbonDialogWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:prism="http://prismlibrary.com/"
     xmlns:core="clr-namespace:PrismOutlook.Core;assembly=PrismOutlook.Core"
                        Height="600" Width="800">
-    
-    <igWpf:RibbonWindowContentHost>
-        <igWpf:RibbonWindowContentHost.Ribbon>
-            <igWpf:XamRibbon prism:RegionManager.RegionName="{x:Static core:RegionNames.RibbonRegion}"/>
-        </igWpf:RibbonWindowContentHost.Ribbon>
 
-        <ContentControl x:Name="_mainRegion" prism:RegionManager.RegionName="{x:Static core:RegionNames.ContentRegion}" />
+    <DockPanel LastChildFill="True">
 
-    </igWpf:RibbonWindowContentHost>
+        <Menu DockPanel.Dock="Top" prism:RegionManager.RegionName="{x:Static core:RegionNames.RibbonRegion}">
+            <MenuItem Header="_File">
+                <MenuItem Header="_New" />
+                <MenuItem Header="_Open" />
+                <MenuItem Header="_Save" />
+                <Separator />
+                <MenuItem Header="_Exit" />
+            </MenuItem>
+        </Menu>
+
+        <ContentControl x:Name="_mainRegion" DockPanel.Dock="Bottom" 
+                        prism:RegionManager.RegionName="{x:Static core:RegionNames.ContentRegion}" />
+    </DockPanel>
     
-</igWpf:XamRibbonWindow>
+</Window>

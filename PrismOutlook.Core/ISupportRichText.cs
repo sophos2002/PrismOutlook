@@ -1,9 +1,9 @@
-﻿using Infragistics.Controls.Editors;
+﻿using System.Windows.Controls;
 
 namespace PrismOutlook.Core
 {
     public interface ISupportRichText
     {
-        XamRichTextEditor RichTextEditor { get; set; }
+        RichTextBox RichTextEditor { get; set; }
     }
 }

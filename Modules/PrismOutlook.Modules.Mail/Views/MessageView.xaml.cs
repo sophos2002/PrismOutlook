@@ -1,5 +1,4 @@
-﻿using Infragistics.Controls.Editors;
-using PrismOutlook.Core;
+﻿using PrismOutlook.Core;
 using PrismOutlook.Modules.Mail.Menus;
 using System.Windows.Controls;
 
@@ -16,7 +15,7 @@ namespace PrismOutlook.Modules.Mail.Views
             InitializeComponent();
         }
 
-        public XamRichTextEditor RichTextEditor
+        public RichTextBox RichTextEditor
         {
             get => _rte;
             set => throw new System.NotImplementedException();

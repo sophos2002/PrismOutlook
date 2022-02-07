@@ -1,12 +1,13 @@
-﻿using Infragistics.Windows.OutlookBar;
-using PrismOutlook.Core;
+﻿using PrismOutlook.Core;
+
+using System.Windows.Controls;
 
 namespace PrismOutlook.Modules.Contacts.Menus
 {
     /// <summary>
     /// Interaction logic for ContactsGroup.xaml
     /// </summary>
-    public partial class ContactsGroup : OutlookBarGroup, IOutlookBarGroup
+    public partial class ContactsGroup : TabItem, IOutlookBarGroup
     {
         public ContactsGroup()
         {
