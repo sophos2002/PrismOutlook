@@ -9,10 +9,6 @@
     <DockPanel LastChildFill="True">
         <Menu DockPanel.Dock="Top" prism:RegionManager.RegionName="{x:Static core:RegionNames.RibbonRegion}">
             <MenuItem Header="_File">
-                <MenuItem Header="_New" />
-                <MenuItem Header="_Open" />
-                <MenuItem Header="_Save" />
-                <Separator />
                 <MenuItem Header="_Exit" />
             </MenuItem>
         </Menu>
@@ -20,7 +16,7 @@
 
         <TabControl DockPanel.Dock="Left" Width="200"
                     prism:RegionManager.RegionName="{x:Static core:RegionNames.OutlookGroupRegion}"
-                    SelectionChanged ="XamOutlookBar_SelectedGroupChanged" >
+                    SelectionChanged ="OutlookBar_SelectedGroupChanged" >
         </TabControl>
 
         <ContentControl prism:RegionManager.RegionName="{x:Static core:RegionNames.ContentRegion}" />

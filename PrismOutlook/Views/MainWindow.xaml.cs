@@ -18,10 +18,9 @@ namespace PrismOutlook.Views
             _applicationCommands = applicationCommands;
         }
 
-        private void XamOutlookBar_SelectedGroupChanged(object sender, RoutedEventArgs e)
+        private void OutlookBar_SelectedGroupChanged(object sender, RoutedEventArgs e)
         {
-            var tabitem = ((TabControl)sender).SelectedItem as IOutlookBarGroup;
-            if (tabitem != null)
+            if (((TabControl)sender).SelectedItem is IOutlookBarGroup tabitem)
             {
                 _applicationCommands.NavigateCommand.Execute(tabitem.DefaultNavigationPath);
             }

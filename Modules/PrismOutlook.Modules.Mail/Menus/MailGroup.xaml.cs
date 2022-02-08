@@ -22,18 +22,23 @@ namespace PrismOutlook.Modules.Mail.Menus
         {
             _dataTree.Loaded -= DataTree_Loaded;
 
-            //! var parentNode = _dataTree.Nodes[0];
-            //! var nodeToSelect = parentNode.Nodes[0];
-            //! nodeToSelect.IsSelected = true;            
+            var obj = _dataTree.ItemContainerGenerator.ContainerFromItem(_dataTree.Items[0]);
+            var tvi = obj as TreeViewItem;
+            if (tvi != null)
+            {
+                tvi.IsSelected = true;
+            }
         }
 
         public string DefaultNavigationPath
         {
             get
             {
-                //! var item = _dataTree.SelectionSettings.SelectedNodes[0] as TreeViewItem;
-                //! if (item != null)
-                //!     return ((NavigationItem)item.Data).NavigationPath;
+                if (_dataTree.SelectedItem is TreeViewItem selectedTVI)
+                {
+                    if (_dataTree.ItemContainerGenerator.ItemFromContainer(selectedTVI) is NavigationItem ni)
+                        return ni.NavigationPath;
+                }
 
                 return $"MailList?{FolderParameters.FolderKey}={FolderParameters.Inbox}";
             }
