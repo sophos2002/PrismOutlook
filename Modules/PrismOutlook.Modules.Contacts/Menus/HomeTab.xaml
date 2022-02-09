@@ -3,6 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
              Header="Contacts">
 
-    <MenuItem Header="Button"/>
+    <MenuItem Header="Do Something..."/>
     
 </MenuItem>

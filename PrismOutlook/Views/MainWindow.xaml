@@ -13,7 +13,6 @@
             </MenuItem>
         </Menu>
 
-
         <TabControl DockPanel.Dock="Left" Width="200"
                     prism:RegionManager.RegionName="{x:Static core:RegionNames.OutlookGroupRegion}"
                     SelectionChanged ="OutlookBar_SelectedGroupChanged" >

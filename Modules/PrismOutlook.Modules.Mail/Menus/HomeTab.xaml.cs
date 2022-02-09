@@ -12,7 +12,7 @@ namespace PrismOutlook.Modules.Mail.Menus
         public HomeTab()
         {
             InitializeComponent();
-            SetResourceReference(StyleProperty, typeof(MenuItem));
+            //! SetResourceReference(StyleProperty, typeof(MenuItem));
         }
     }
 }

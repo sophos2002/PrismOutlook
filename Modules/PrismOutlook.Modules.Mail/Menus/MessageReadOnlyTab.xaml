@@ -3,13 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              Header="Home" >
 
-    <MenuItem Header="Delete">
-        <MenuItem Header="Delete" Command="{Binding DeleteMessageCommand}" />
-    </MenuItem>
-    <MenuItem Header="Respond">
-        <MenuItem Header="Reply" Command="{Binding MessageCommand}" CommandParameter="Reply"/>
-        <MenuItem Header="ReplyAll" Command="{Binding MessageCommand}" CommandParameter="ReplyAll" />
-        <MenuItem Header="Forward" Command="{Binding MessageCommand}" CommandParameter="Forward" />
-    </MenuItem>
+    <MenuItem Header="Delete" Command="{Binding DeleteMessageCommand}" />
+    <MenuItem Header="Reply" Command="{Binding MessageCommand}" CommandParameter="Reply"/>
+    <MenuItem Header="ReplyAll" Command="{Binding MessageCommand}" CommandParameter="ReplyAll" />
+    <MenuItem Header="Forward" Command="{Binding MessageCommand}" CommandParameter="Forward" />
 
 </MenuItem>

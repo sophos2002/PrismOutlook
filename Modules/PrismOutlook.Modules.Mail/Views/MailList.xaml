@@ -7,8 +7,8 @@
              prism:ViewModelLocator.AutoWireViewModel="True">
 
     <UserControl.Resources>
-        <!-- converters:MailAddressConverter x:Key="MailAddressConverter" / -->
-        <!-- igPrim:NullableToVisibilityConverter x:Key="NullableToVisibilityConverter"/ -->
+        <converters:MailAddressConverter x:Key="MailAddressConverter" />
+        <converters:NullableToVisibilityConverter x:Key="NullableToVisibilityConverter"/>
 
     </UserControl.Resources>
     
@@ -19,30 +19,39 @@
         </Grid.ColumnDefinitions>
 
         <!--Mail List-->
-        <Grid Background="White" Margin="5,0,0,0">
-            
-            <ListView Margin="0,0,10,0" ItemsSource="{Binding Messages}" >
+        <ListView Margin="4,4,4,4" ItemsSource="{Binding Messages}" >
+            <ListView.InputBindings>
+                <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding MessageCommand}" CommandParameter="Read"/>
+                <KeyBinding Command="{Binding DeleteMessageCommand}" Key="Delete" />
+            </ListView.InputBindings>
 
-                <ListView.InputBindings>
-                    <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding MessageCommand}" CommandParameter="Read"/>
-                    <KeyBinding Command="{Binding DeleteMessageCommand}" Key="Delete" />
-                </ListView.InputBindings>
 
-            </ListView>
-        </Grid>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <WrapPanel>
+                        <TextBlock Text="From: " />
+                        <TextBlock Text="{Binding From}" FontWeight="Bold" />
+                        <TextBlock Text=", " />
+                        <TextBlock Text="Subject: " />
+                        <TextBlock Text="{Binding Subject}" FontWeight="Bold" />
+                    </WrapPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
 
-        <!--Mail Preview Area-->
-        <!-- controls:MessageDisplayControl Grid.Column="1" Visibility="{Binding Message, Converter={StaticResource NullableToVisibilityConverter}}" / -->
+        </ListView>
 
         <GridSplitter Grid.Column="1" VerticalAlignment="Stretch"  Width="10" HorizontalAlignment="Left"  Grid.RowSpan="100">
             <GridSplitter.Template>
                 <ControlTemplate>
                     <Grid Background="White">
-                        <Rectangle Width="1" Fill="#D4D4D4" Margin="0,5,0,0" HorizontalAlignment="Center"/>
+                        <Rectangle Width="1" Fill="#D4D4D4" Margin="0,4,0,0" HorizontalAlignment="Center"/>
                     </Grid>
                 </ControlTemplate>
             </GridSplitter.Template>
         </GridSplitter>
+
+        <!--Mail Preview Area-->
+        <controls:MessageDisplayControl Grid.Column="1" Visibility="{Binding Message, Converter={StaticResource NullableToVisibilityConverter}}" />
 
     </Grid>
 </UserControl>

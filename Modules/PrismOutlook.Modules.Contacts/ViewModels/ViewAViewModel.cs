@@ -18,7 +18,7 @@ namespace PrismOutlook.Modules.Contacts.ViewModels
             set { SetProperty(ref _message, value); }
         }
 
-        public bool KeepAlive => false;
+        public bool KeepAlive => true;
 
         public ViewAViewModel()
         {

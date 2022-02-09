@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,6 +16,7 @@ using System.Windows.Shapes;
 
 namespace PrismOutlook.Modules.Mail.Controls
 {
+
     /// <summary>
     /// Interaction logic for MessageDisplayControl.xaml
     /// </summary>

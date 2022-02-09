@@ -1,5 +1,6 @@
 ﻿using Prism.Regions;
 
+using System.Diagnostics;
 using System.Windows.Controls;
 
 namespace PrismOutlook.Core.Regions
@@ -16,6 +17,8 @@ namespace PrismOutlook.Core.Regions
         {
             region.Views.CollectionChanged += ((s, e) =>
             {
+                Debug.WriteLine("OutlookBarRegionAdapter:" + e.Action.ToString());
+
                 switch (e.Action)
                 {
                     case System.Collections.Specialized.NotifyCollectionChangedAction.Add:
@@ -23,15 +26,6 @@ namespace PrismOutlook.Core.Regions
                             foreach (TabItem i in e.NewItems)
                             {
                                 targetTabControl.Items.Add(i);
-
-                                //The WPF XamOutlookBar does not automatically select the first group in it's collection.
-                                //So we must manually select the group if it is the first one in the collection, but we don't
-                                //want to excute this code every time a new group is added, only if the first group is the current group being added.
-
-                                if (targetTabControl.Items[0] == i)
-                                {
-                                    targetTabControl.SelectedItem = i;
-                                }
                             }
                             break;
                         }

@@ -41,9 +41,9 @@ namespace PrismOutlook.Core.Regions
                     else
                     {
                         var atts = GetCustomAttributes<DependentViewAttribute>(newView.GetType());
-                        foreach (var att in atts)
+                        foreach (var a in atts)
                         {
-                            var info = CreateDependentViewInfo(att);
+                            var info = CreateDependentViewInfo(a);
 
                             if (info.View is ISupportDataContext infoDC && newView is ISupportDataContext viewDC)
                             {
