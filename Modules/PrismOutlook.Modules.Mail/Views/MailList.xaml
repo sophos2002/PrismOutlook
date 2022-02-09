@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:prism="http://prismlibrary.com/"         
              xmlns:converters="clr-namespace:PrismOutlook.Modules.Mail.Converters"
-             xmlns:controls="clr-namespace:PrismOutlook.Modules.Mail.Controls"
+             xmlns:controls="clr-namespace:PrismOutlook.Modules.Mail.Controls" 
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              prism:ViewModelLocator.AutoWireViewModel="True">
 
     <UserControl.Resources>
@@ -21,20 +22,32 @@
         <!--Mail List-->
         <ListView Margin="4,4,4,4" ItemsSource="{Binding Messages}" >
             <ListView.InputBindings>
-                <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding MessageCommand}" CommandParameter="Read"/>
-                <KeyBinding Command="{Binding DeleteMessageCommand}" Key="Delete" />
+                <!-- Below mousebinding doesnot work! 
+                     Ref: https://social.msdn.microsoft.com/Forums/en-us/9fb566a2-0bd6-48a7-8db3-312cd3e93340/mousebindingleftdoubleclick-on-a-listbox-does-not-work
+                -->
+                <!--<MouseBinding MouseAction="LeftDoubleClick" Command="{Binding MessageCommand}" CommandParameter="Read"/>-->
+
+                <!-- but this does work!-->
+                <KeyBinding Key="R" Command="{Binding MessageCommand}" CommandParameter="Read"/>
+                
+                <KeyBinding Key="Delete" Command="{Binding DeleteMessageCommand}" />
             </ListView.InputBindings>
 
+            <!-- this also does work!-->
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseDoubleClick">
+                    <i:InvokeCommandAction Command="{Binding MessageCommand}" CommandParameter="Read" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
 
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <WrapPanel>
+                    <StackPanel Margin="0,2,0,2">
                         <TextBlock Text="From: " />
                         <TextBlock Text="{Binding From}" FontWeight="Bold" />
-                        <TextBlock Text=", " />
                         <TextBlock Text="Subject: " />
                         <TextBlock Text="{Binding Subject}" FontWeight="Bold" />
-                    </WrapPanel>
+                    </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
 
