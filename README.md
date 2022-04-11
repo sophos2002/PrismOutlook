@@ -1,38 +1,19 @@
 # PrismOutlook
 
-The Prism for WPF app that we are building live on Twitch/YouTube.
+This is a sample that explains the Prism for WPF app, originally built live on Twitch/YouTube by Brian Lagunas.
 
-## WPF info
+## My Changes
 
-#### HeaderedContentControl
+- XamRichTextEditor -> RichTextBox
 
-Object
- DispatcherObject
-  DependencyObject
-   Visual
-    UIElement
-     FrameworkElement
-      Control
-       ContentControl
-        HeaderedContentControl
+- RibbonTabItem -> MenuItem
+- RibbonGroup -> MenuItem
+- ButtonTool -> MenuItem
 
-Derived
-- System.Windows.Controls.Expander
-- System.Windows.Controls.GroupBox
-- System.Windows.Controls.TabItem
+- XamOutlookBar -> TabControl
+- OutlookBarGroup -> TabItem
 
+- XamDataTree -> TreeView
+- XamDataTreeNode -> TreeViewItem
 
-## Changes
-
-XamRichTextEditor -> RichTextBox
-
-RibbonTabItem -> MenuItem
-RibbonGroup -> MenuItem
-ButtonTool -> MenuItem
-
-XamOutlookBar -> TabControl
-OutlookBarGroup -> TabItem
-
-XamDataTree -> TreeView
-XamDataTreeNode -> TreeViewItem
-
+(NOT FINISH YET)
